@@ -50,7 +50,7 @@ public class Anagram {
 		//Create FileReader
 		System.out.println("Finding possiblities... please wait");
 		try {
-			BufferedReader read = new BufferedReader(new FileReader(new File("/Users/league/eclipse-workspace/League-Level4/src/Anagrams/words.txt")));
+			BufferedReader read = new BufferedReader(new FileReader(new File("/Users/league/Desktop/League-Level4/src/Anagrams/words.txt")));
 			String temp = read.readLine().toLowerCase();
 			int it = 0;
 			while(it < 235885) {
@@ -95,10 +95,37 @@ public class Anagram {
 		}
 		else if(stuff.size() == 1) {
 			finalResults.add(stuff.get(0));
+			System.out.println(stuff.get(0));
 		}
 		else {
+			//There are multiple possible combinations, which is problematic - most are probably incorrect.
+			System.out.println("There are multiple combos");
 			for(int i = 0; i < stuff.size(); i++) {
-				char[] temporary = stuff.get(i).toCharArray();
+				ArrayList<Character> letterArray = new ArrayList<Character>();
+				//Convert into ArrayList<> to check against
+				System.out.println(stuff.get(i).length());
+				for(int j = 0; j < stuff.get(i).length(); j++) {
+					System.out.println("I: " + i + " J: " + j);
+					letterArray.add(stuff.get(i).toCharArray()[j]);
+				}
+				System.out.println(letterArray.toString());
+				char[] anagram = scrambled.toCharArray();
+				for(int j = 0; j < anagram.length; j++) {
+					if(letterArray.contains(anagram[j])) {
+						//Contains letter, remove it
+						System.out.println(anagram[j]);
+						letterArray.remove(new Character(anagram[j]));
+						if(letterArray.size() < 1) {
+							System.out.println("Adding...");
+							System.out.println(stuff.get(i));
+							finalResults.add(stuff.get(i));
+						}
+					}
+					else {
+						//Doesn't contain letter, break
+						break;
+					}
+				}
 			}
 		}
 		return finalResults;
