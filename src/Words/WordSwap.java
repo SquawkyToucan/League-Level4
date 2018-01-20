@@ -11,6 +11,7 @@ public class WordSwap {
 	 *  - At every ' ', add new string that is all of the chars before it
 	 */
 	public static void main(String[] args) {
+		//Asks for word then edits it
 		JOptionPane.showMessageDialog(null, new WordSwap().swap(JOptionPane.showInputDialog("Enter a sentence or phrase")));
 	}
 	public String swap(String s) {
